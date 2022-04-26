@@ -65,7 +65,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges {
 	separateDialCodeClass: string;
 
 	@Output() readonly countryChange = new EventEmitter<Country>();
-	@Output()
+	@Output() readonly onBlur = new EventEmitter<string>();
 
 	selectedCountry: Country = {
 		areaCodes: undefined,
@@ -375,6 +375,11 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges {
 			}
 		}
 		return placeholder;
+	}
+
+	onLostFocus() {
+		this.onTouched();
+		this.onBlur.next(this.value);
 	}
 
 	/* --------------------------------- Helpers -------------------------------- */
